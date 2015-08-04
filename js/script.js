@@ -3,12 +3,16 @@
     }
 
     function drag(ev) {
-        console.log(ev);
         ev.dataTransfer.setData("text", ev.target.id);
     }
 
     function drop(ev) {
-        ev.preventDefault();
+        console.log(ev);
+        console.log(this);
+
+        var audio = new Audio('audio/drop_trash.wav');
+        audio.play();
+
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
     }
@@ -23,17 +27,17 @@
             },
             'plastico': {
                 'label': 'Plástico',
-                'src': 'img/trash.png',
+                'src': 'img/trash2.png',
                 'items': []
             },
             'vidro': {
                 'label': 'Vidro',
-                'src': 'img/trash.png',
+                'src': 'img/trash3.png',
                 'items': []
             },
             'metal': {
                 'label': 'Metal',
-                'src': 'img/trash.png',
+                'src': 'img/trash4.png',
                 'items': []
             }
         };
@@ -49,13 +53,13 @@
             'type': 'papel',
             'posx': '50',
             'posy': '50',
-            'image': 'img/item.png'
+            'image': 'img/jornal.png'
         }, {
             'label': 'Garrafa quebrada',
             'type': 'vidro',
             'posx': '400',
             'posy': '100',
-            'image': 'img/item.png'
+            'image': 'img/garrafa_vidro.png'
         }];
 
 
@@ -87,7 +91,7 @@
         function renderItems() {
             $.each(items, function(key, value) {
                 console.log(value);
-                $('#dumps').append('<div id="' + key + '" class="trash" ondragstart="drag(event)" draggable="true" title="' + value.label + '" style="background-image: url(' + value.image + '); top:' + value.posy + '; left:' + value.posx + ';"></div>');
+                $('#main_scene').append('<div id="' + key + '" class="trash" ondragstart="drag(event)" draggable="true" title="' + value.label + '" style="background-image: url(' + value.image + '); top:' + value.posy + '; left:' + value.posx + ';"></div>');
             });
         }
 
